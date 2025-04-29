@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helmapp
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    helm:
+      releaseName: AppHelm
+      parameters:
+        - name: "replicacount"
+          value: "5"
+        - name: "image.repository"
+          value: "vimal13/apache-webserver-php"
+        - name: "image.tag"
+          value: "latest"
+
+    repoURL: https://github.com/priyam930/ArgoCD_2025.git
+    path: HelmCharts/lwchart
+    targetRevision: main

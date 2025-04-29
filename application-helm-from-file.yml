@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helmapp
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    helm:
+      releaseName: AppHelm
+      valueFiles:
+        - custom_values_for_helm.yml
+
+    repoURL: https://github.com/priyam930/ArgoCD_2025.git
+    path: HelmCharts/lwchart
+    targetRevision: main
